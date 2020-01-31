@@ -1,26 +1,32 @@
 package com.couches.engine;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
 public class Container implements Runnable
 {
 	private Thread thread;
 	private Window window;
 	private Render renderer;
+	private Input input;
+	private Controller game;
 	
 	private boolean running = false;
 	private final double UPDATE_CAP = 1.0 / 60.0;
 	private int width = 720, height = 480;
-	private float scale = 2f;
+	private float scale = 1.5f;
 	private String title = "Couches' Engine v1.0";
 	
-	public Container()
+	public Container(Controller game)
 	{
-		
+		this.game = game;
 	}
 	
 	public void start()
 	{
 		window = new Window(this);
 		renderer = new Render(this);
+		input = new Input(this);
 		
 		thread = new Thread(this);
 		thread.run();
@@ -35,7 +41,7 @@ public class Container implements Runnable
 	{
 		running = true;
 		
-		boolean render = false;
+		boolean render;
 		double firstTime = 0;
 		double lastTime = System.nanoTime() / 1000000000.0;
 		double passedTime = 0;
@@ -61,7 +67,10 @@ public class Container implements Runnable
 				unprocessedTime -= UPDATE_CAP;
 				render = true;
 				
-				//TODO: Update
+				game.update(this, (float) UPDATE_CAP);
+				
+				input.update();
+				
 				if(frameTime >= 1.0)
 				{
 					frameTime = 0;
@@ -74,7 +83,7 @@ public class Container implements Runnable
 			if(render)
 			{
 				renderer.clear();
-				//TODO: Render
+				game.render(this, renderer);
 				window.update();
 				frames++;
 			}
@@ -97,12 +106,6 @@ public class Container implements Runnable
 	private void dispose()
 	{
 		
-	}
-	
-	public static void main(String[] args)
-	{
-		Container c = new Container();
-		c.start();
 	}
 
 	public int getWidth()
@@ -148,5 +151,10 @@ public class Container implements Runnable
 	public Window getWindow()
 	{
 		return window;
+	}
+
+	public Input getInput()
+	{
+		return input;
 	}
 }

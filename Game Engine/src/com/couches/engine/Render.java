@@ -2,6 +2,8 @@ package com.couches.engine;
 
 import java.awt.image.DataBufferInt;
 
+import com.couches.engine.gfx.Image;
+
 public class Render
 {
 	private int pw, ph;
@@ -16,10 +18,32 @@ public class Render
 	
 	public void clear()
 	{
-		for(int i = 0; i < p.length; i++)
+		for(int i = 0; i < p.length; i++) p[i] = 0;
+	}
+	
+	public void setPixel(int x, int y, int value)
+	{
+		if ((x < 0 || x >= pw || y < 0 || y >= ph) || value == 0xffff00ff)
 		{
-			//TODO: Set += i to = 0
-			p[i] += i;
+			return;
+		}
+		
+		p[x + y * pw] = value; 
+	}
+	
+	public void drawImage(Image image, int offX, int offY)
+	{
+		int newX = 0;
+		int newY = 0;
+		int newWidth = 0;
+		int newHeight = 0;
+		
+		for (int y = 0; y < image.getH(); y++)
+		{
+			for (int x = 0; x < image.getW(); x++)
+			{
+				setPixel(x + offX, y + offY, image.getP()[x + y * image.getW()]);
+			}
 		}
 	}
 }
