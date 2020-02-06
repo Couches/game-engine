@@ -6,11 +6,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.couches.engine.gfx.Image;
+
 public class Grid
 {
 	private double scale;
 	private int width, height;
-	private BufferedImage image = null;
+	private BufferedImage bufferedImage = null;
+	private Image image = null;
 	
 	public Grid(double scale, String path)
 	{
@@ -18,7 +21,7 @@ public class Grid
 		
 		try
 		{
-			image = ImageIO.read(file);
+			bufferedImage = ImageIO.read(file);
 		}
 		catch (IOException e)
 		{
@@ -26,11 +29,18 @@ public class Grid
 		}
 		
 		this.scale = scale;
-		this.width = image.getWidth();
-		this.height = image.getHeight();
+		this.width = bufferedImage.getWidth();
+		this.height = bufferedImage.getHeight();
+		
+		image = new Image(path);
 	}
 
-	public BufferedImage getLevel()
+	public BufferedImage getBufferedImage()
+	{
+		return this.bufferedImage;
+	}
+	
+	public Image getImage()
 	{
 		return this.image;
 	}

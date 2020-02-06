@@ -8,6 +8,7 @@ import com.couches.engine.gfx.Tile;
 
 public class Render
 {
+	private int dw, dh;
 	private int pw, ph;
 	private int[] p;
 	
@@ -16,6 +17,8 @@ public class Render
 		pw = c.getWidth();
 		ph = c.getHeight();
 		p = ((DataBufferInt)c.getWindow().getImage().getRaster().getDataBuffer()).getData();
+		this.dw = c.displayWidth;
+		this.dh = c.displayHeight;
 	}
 	
 	public void clear(int r, int g, int b)
@@ -97,19 +100,20 @@ public class Render
 		}
 	}
 	
-	public void drawPlayer(Player player)
+	public void drawPlayer(Player player, int x, int y)
 	{
-		drawImage(player.getTexture(), (int) player.getX(), (int) player.getY());
+		drawImage(player.getTexture(), dw / 2 - player.getTexture().getW() + 4, dh / 2 - player.getTexture().getH() + 4);
 	}
 	
-	public void drawGrid(Grid grid)
+	public void drawGrid(Grid grid, int x, int y)
 	{
 		for (int i = 0; i < grid.getHeight(); i++)
 		{
 			for (int j = 0; j < grid.getWidth(); j++)
 			{
-				if (grid.getLevel().getRGB(i, j) != 0xffff00ff)
-					drawRect((int) (i * grid.getScale()), (int) (j * grid.getScale()), (int) Math.ceil(grid.getScale()), (int) Math.ceil(grid.getScale()), grid.getLevel().getRGB(i, j));
+				if (grid.getBufferedImage().getRGB(i, j) != 0xffff00ff)
+					
+					drawRect((int) (i * grid.getScale()) + x, (int) (j * grid.getScale()) + y, (int) Math.ceil(grid.getScale()), (int) Math.ceil(grid.getScale()), grid.getBufferedImage().getRGB(i, j));
 			}
 		}
 	}

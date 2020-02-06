@@ -81,69 +81,58 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 		return buttons[buttonCode] && !buttonsLast[buttonCode];
 	}
 	
-	@Override
 	public void mouseWheelMoved(MouseWheelEvent e)
 	{
 		scroll = e.getWheelRotation();
 	}
-
-	@Override
+	
 	public void mouseDragged(MouseEvent e)
 	{
 		mouseX = (int) (e.getX() / c.getScale());
 		mouseY = (int) (e.getY() / c.getScale());
 	}
-
-	@Override
+	
 	public void mouseMoved(MouseEvent e)
 	{
 		mouseX = (int) (e.getX() / c.getScale());
 		mouseY = (int) (e.getY() / c.getScale());
 	}
-
-	@Override
+	
 	public void mouseClicked(MouseEvent e)
 	{
 		
 	}
-
-	@Override
+	
 	public void mousePressed(MouseEvent e)
 	{
 		buttons[e.getButton()] = true;
 	}
-
-	@Override
+	
 	public void mouseReleased(MouseEvent e)
 	{
 		buttons[e.getButton()] = false;
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e)
 	{
 		
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e)
 	{
 		
 	}
-
-	@Override
+	
 	public void keyTyped(KeyEvent e)
 	{
 		
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e)
 	{
 		keys[e.getKeyCode()] = true;
 	}
 
-	@Override
 	public void keyReleased(KeyEvent e)
 	{
 		keys[e.getKeyCode()] = false;

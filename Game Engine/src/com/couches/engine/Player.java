@@ -6,6 +6,8 @@ import com.couches.engine.gfx.Image;
 
 public class Player
 {
+	private Container c = new Container();
+	
 	private double x, y, xvel, yvel;
 	private Image texture = new Image("res/textures/sample02.png");
 	

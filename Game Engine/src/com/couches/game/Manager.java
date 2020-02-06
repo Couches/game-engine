@@ -1,5 +1,7 @@
 package com.couches.game;
 
+import java.awt.event.KeyEvent;
+
 import com.couches.engine.Container;
 import com.couches.engine.Controller;
 import com.couches.engine.Grid;
@@ -9,7 +11,7 @@ import com.couches.engine.Render;
 public class Manager extends Controller	
 {
 	Player player = new Player();
-	Grid level = new Grid(200.0 / 200.0, "res/textures/sample02.png");
+	Grid level = new Grid(200.0 / 16.0, "res/textures/sampleLevel02.png");
 	
 	public Manager()
 	{
@@ -27,9 +29,8 @@ public class Manager extends Controller
 	
 	public void render(Container c, Render r)
 	{
-		//r.drawImage(image, c.getInput().getMouseX() - image.getW() / 2, c.getInput().getMouseY() - image.getH() / 2);
-		r.drawGrid(level);
-		r.drawPlayer(player);
+		r.drawGrid(level, (int) -player.getX(), (int) -player.getY());
+		r.drawPlayer(player, (int) player.getX(), (int) player.getY());
 	}
 	
 	

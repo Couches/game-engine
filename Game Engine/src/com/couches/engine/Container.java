@@ -10,13 +10,18 @@ public class Container implements Runnable
 	
 	private boolean running = false;
 	private final double UPDATE_CAP = 1.0 / 144.0;
-	private int width = 720, height = 480;
+	public int displayWidth = 400, displayHeight = 400;
 	private float scale = 1f;
 	private String title = "Couches' Engine v1.0";
 	
 	public Container(Controller game)
 	{
 		this.game = game;
+	}
+	
+	public Container()
+	{
+		
 	}
 	
 	public void start()
@@ -107,22 +112,22 @@ public class Container implements Runnable
 
 	public int getWidth()
 	{
-		return width;
+		return displayWidth;
 	}
 
 	public void setWidth(int width)
 	{
-		this.width = width;
+		this.displayWidth = width;
 	}
 
 	public int getHeight()
 	{
-		return height;
+		return displayHeight;
 	}
 
 	public void setHeight(int height)
 	{
-		this.height = height;
+		this.displayHeight = height;
 	}
 
 	public float getScale()
