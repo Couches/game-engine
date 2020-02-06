@@ -27,7 +27,7 @@ public class Image
 		
 		w = image.getWidth();
 		h = image.getHeight();
-		p = image.getRGB(0,  0,  w,  h,  null, 0, w);
+		this.p = image.getRGB(0,  0,  w,  h,  null, 0, w);
 		
 		image.flush();
 	}

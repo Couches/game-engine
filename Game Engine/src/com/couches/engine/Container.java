@@ -1,8 +1,5 @@
 package com.couches.engine;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
 public class Container implements Runnable
 {
 	private Thread thread;
@@ -12,9 +9,9 @@ public class Container implements Runnable
 	private Controller game;
 	
 	private boolean running = false;
-	private final double UPDATE_CAP = 1.0 / 60.0;
+	private final double UPDATE_CAP = 1.0 / 144.0;
 	private int width = 720, height = 480;
-	private float scale = 1.5f;
+	private float scale = 1f;
 	private String title = "Couches' Engine v1.0";
 	
 	public Container(Controller game)
@@ -82,7 +79,7 @@ public class Container implements Runnable
 			
 			if(render)
 			{
-				renderer.clear();
+				renderer.clear(0, 191, 255);
 				game.render(this, renderer);
 				window.update();
 				frames++;
